@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import Items from '../components/Items';
 
 const Home = (props) => (
   <div>
-    <p>Home</p>
+    <Items />
   </div>
 );
 
