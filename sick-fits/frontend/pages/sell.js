@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import CreateItem from '../components/CreateItem';
 
 const Sell = (props) => (
   <div>
-    <p>Sell</p>
+    <CreateItem />
   </div>
 );
 
