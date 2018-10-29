@@ -41,6 +41,23 @@ class CreateItem extends React.Component {
     price: 0,
   };
 
+  uploadFile = async (event) => {
+    const files = event.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset', 'sickfits');
+
+    const resp = await fetch(process.env.CLOUDINARY_URL, {
+      method: 'POST',
+      body: data,
+    });
+    const file = await resp.json();
+    this.setState({
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    });
+  }
+
   handleOnChange = (event) => {
     const { value, name, type } = event.target;
     const val = type === 'number' ? parseFloat(value) : value;
@@ -62,6 +79,18 @@ class CreateItem extends React.Component {
           }}>
           <ErrorMessage error={error} />
           <fieldset disabled={loading} aria-busy={loading}>
+            <label htmlFor="file">
+              File
+              <input
+                type="file"
+                id="file"
+                name="file"
+                placeholder="Upload an image"
+                required
+                onChange={this.uploadFile}
+              />
+              {this.state.image && <img src={this.state.image} alt="upload preview" />}
+            </label>
             <label htmlFor="title">
               Title
               <input

@@ -16,7 +16,7 @@ class Item extends React.Component {
     const { item } = this.props;
     return (
       <ItemStyles>
-        {item.image && <img src={item.image} alt={image.title} />}
+        {item.image && <img src={item.image} alt={item.image.title} />}
         <Link href={{ pathname: "item", query: { id: item.id } }}>
           <a>
             <Title>{item.title}</Title>
